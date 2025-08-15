@@ -24,6 +24,18 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       apt install -y cmake
     fi
 
+    which -s cppcheck
+    if [[ $? != 0 ]] ; then
+      apt install -y cppcheck
+    fi
+
+    which -s pipx
+    if [[ $? != 0 ]] ; then
+      apt install -y pipx
+      pipx ensurepath
+    fi
+    pipx install cpplint
+
     which -s cargo
     if [[ $? != 0 ]] ; then
       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
@@ -59,11 +71,23 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       brew install -y cmake
     fi
 
+    which -s cppcheck
+    if [[ $? != 0 ]] ; then
+      brew install -y cppcheck
+    fi
+
+    which -s pipx
+    if [[ $? != 0 ]] ; then
+      brew install -y pipx
+    fi
+    pipx install cpplint
+
     which -s cargo
     if [[ $? != 0 ]] ; then
       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
     fi
 
+    pipx ensurepath
     source ~/.zshenv
 else
     echo "Unsupported OS: $OSTYPE"
@@ -72,21 +96,19 @@ fi
 
 # Create gojo directory.
 mkdir -p ~/.gojo
-mkdir -p ~/.gojo/repos/gojo
+mkdir -p ~/.gojo/repos
 mkdir ~/.gojo/include
 mkdir ~/.gojo/lib
 mkdir ~/.gojo/bin
 
 # Clone gojo repo and build from source.
-# ONLY FOR DOCKER TEST
-cp -r . ~/.gojo/repos/gojo
-cd ~/.gojo/repos/gojo
-# END ONLY FOR DOCKER TEST
-#git clone <url of gojo repo>
-#cd gojo
+cd ~/.gojo/repos
+git clone https://github.com/gojo-cli/gojo.git
+cd gojo
 ~/.cargo/bin/cargo build --release
 strip target/release/gojo
 mv target/release/gojo ~/.gojo/bin
+rm -rf target
 
 # Clone gojo++ repo and build from source.
 #cd ~/.gojo/repos

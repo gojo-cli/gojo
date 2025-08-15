@@ -60,6 +60,12 @@ fn main() {
     "install" => {
       result = commands::install(command_args);
     }
+    "uninstall" => {
+
+    }
+    "create" => {
+      // class or header
+    }
     "help" | "--help" | "-h" => {
       commands::help();
     }
