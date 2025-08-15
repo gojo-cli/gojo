@@ -1,6 +1,6 @@
 pub fn root_cmake_lists_txt(name: &str, std: &str, cpp: &str, version: &str) -> String {
-  format!(
-    "cmake_minimum_required(VERSION {version})
+    format!(
+        "cmake_minimum_required(VERSION {version})
 
 project( {name}
   VERSION 1.0
@@ -41,12 +41,12 @@ if(BUILD_TESTING)
   include(CTest)
   add_subdirectory(test)
 endif()"
-  )
+    )
 }
 
 pub fn main_src(hpp: &str) -> String {
-  format!(
-    "#include \"lib/hello_world.{hpp}\"
+    format!(
+        "#include \"lib/hello_world.{hpp}\"
 #include <iostream>
 
 int main() {{
@@ -54,36 +54,36 @@ int main() {{
   return 0;
 }}
 "
-  )
+    )
 }
 
 pub fn lib_hello_world_src(hpp: &str) -> String {
-  format!(
-    "#include \"hello_world.{hpp}\"
+    format!(
+        "#include \"hello_world.{hpp}\"
 
 const char* hello_world() {{
   return \"Hello World!\";
 }}
 "
-  )
+    )
 }
 
 pub fn lib_hello_world_hdr(hpp: &str) -> String {
-  let upper_hpp = hpp.to_uppercase();
-  format!(
-    "#ifndef LIB_HELLO_WORLD_{upper_hpp}
+    let upper_hpp = hpp.to_uppercase();
+    format!(
+        "#ifndef LIB_HELLO_WORLD_{upper_hpp}
 #define LIB_HELLO_WORLD_{upper_hpp}
 
 const char* hello_world();
 
 #endif
 "
-  )
+    )
 }
 
 pub fn lib_cmake_lists_txt(cpp: &str) -> String {
-  format!(
-    "add_library( lib
+    format!(
+        "add_library( lib
   STATIC
   hello_world.{cpp}
 )
@@ -95,12 +95,12 @@ pub fn lib_cmake_lists_txt(cpp: &str) -> String {
 target_link_libraries( lib
   # Add libraries here.
 )"
-  )
+    )
 }
 
 pub fn test_hello_world_src(hpp: &str) -> String {
-  format!(
-    "#include \"../src/lib/hello_world.{hpp}\"
+    format!(
+        "#include \"../src/lib/hello_world.{hpp}\"
 
 #include <gtest/gtest.h>
 
@@ -108,12 +108,12 @@ TEST(HelloTest, BasicAssertions) {{
   EXPECT_EQ(hello_world(), \"Hello World!\");
 }}
 "
-  )
+    )
 }
 
 pub fn test_cmake_lists_txt(cpp: &str) -> String {
-  format!(
-    "enable_testing()
+    format!(
+        "enable_testing()
 set(CMAKE_CXX_CLANG_TIDY \"\")
 
 #include(FetchContent)
@@ -139,14 +139,14 @@ target_link_libraries( hello_world_test
 include(GoogleTest)
 gtest_discover_tests(hello_world_test)
 # Add more tests here."
-  )
+    )
 }
 
 pub fn readme(name: &str) -> String {
-  format!(
-    "# {name}
+    format!(
+        "# {name}
 
 TODO: write a readme...
 "
-  )
+    )
 }

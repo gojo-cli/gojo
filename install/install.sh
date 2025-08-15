@@ -38,7 +38,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     which -s cargo
     if [[ $? != 0 ]] ; then
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | source -s -- -y
     fi
 
     source ~/.bashrc
@@ -84,7 +84,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     which -s cargo
     if [[ $? != 0 ]] ; then
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | source -s -- -y
     fi
 
     pipx ensurepath
@@ -111,12 +111,13 @@ mv target/release/gojo ~/.gojo/bin
 rm -rf target
 
 # Clone gojo++ repo and build from source.
-#cd ~/.gojo/repos
-#git clone <url of gojo++ repo>
-#cd gojo++
-#cargo build --release
-#strip target/release/gojo++
-#mv target/release/gojo++ ~/.gojo/bin
+cd ~/.gojo/repos
+git clone https://github.com/gojo-cli/gojo-updater.git
+cd gojo-updater
+~/.cargo/bin/cargocargo build --release
+strip target/release/gojo-updater
+mv target/release/gojo-updater target/release/gojo++
+mv target/release/gojo++ ~/.gojo/bin
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "export PATH=\"$HOME/.gojo/bin:\$PATH\"" >> ~/.bashrc
