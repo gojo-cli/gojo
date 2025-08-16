@@ -53,9 +53,12 @@ fn main() {
         "install" => {
             result = commands::install(command_args);
         }
-        "uninstall" => {}
-        "create" => {
+        "uninstall" => {
+            println!("\x1b[31mincorrect usage:\x1b[0m \n\tcommand not recognized: {command}");
+        }
+        "add" => {
             // class or header
+            println!("\x1b[31mincorrect usage:\x1b[0m \n\tcommand not recognized: {command}");
         }
         "help" | "--help" | "-h" => {
             commands::help();

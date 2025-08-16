@@ -3,8 +3,8 @@ use crate::plaintext;
 use crate::templates;
 
 use std::collections::hash_map::HashMap;
-use std::fs;
 use std::env;
+use std::fs;
 use std::io::Error;
 use std::io::ErrorKind;
 use std::io::Result;
@@ -653,12 +653,7 @@ pub fn check() -> Result<()> {
 
         print!("\x1b[1;35mCompiling\x1b[0m {} \x1b[1;35min\x1b[0m \x1b[1;36mRelease\x1b[0m \x1b[1;35mmode\x1b[0m\n\n", config.name);
         Command::new("cmake")
-            .args([
-                "--build",
-                config.build_dir.as_str(),
-                "-j",
-                "$(nproc)",
-            ])
+            .args(["--build", config.build_dir.as_str(), "-j", "$(nproc)"])
             .stdout(Stdio::null())
             .stderr(Stdio::inherit())
             .output()?;

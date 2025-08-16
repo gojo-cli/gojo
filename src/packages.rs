@@ -10,12 +10,11 @@ pub fn install_gtest() -> Result<()> {
     let home = tmp.to_str().unwrap();
 
     if fs::exists(format!("{home}/repos/googletest"))? {
-      println!("googletest is already installed");
-      return Ok(());
+        println!("googletest is already installed");
+        return Ok(());
     }
 
-    // let gtest_package_url = "https://gojo-cli.github.io/packages/gtest.sh";
-    let gtest_install_script = format!("{home}/.gojo/repos/packages/packages/gtest.sh");
+    let gtest_install_script = format!("{home}/.gojo/repos/packages/install/googletest.sh");
     Command::new("bash")
         .arg(gtest_install_script)
         .current_dir(format!("{home}"))
@@ -23,18 +22,6 @@ pub fn install_gtest() -> Result<()> {
         .stderr(Stdio::inherit())
         .output()?;
 
-        /*
-    let source = Command::new("source")
-        .args(["-s", "--", "-y"])
-        .stdin(Stdio::from(curl.stdout.unwrap()))
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .spawn()
-        .unwrap();*/
-    
-    //let output = source.wait_with_output().unwrap();
-    //let result = std::str::from_utf8(&output.stdout).unwrap();
-    //println!("{result}");
     println!("gtest successfully installed");
     Ok(())
 }
