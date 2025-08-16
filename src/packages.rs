@@ -15,21 +15,21 @@ pub fn install_gtest() -> Result<()> {
     }
 
     let gtest_package_url = "https://gojo-cli.github.io/packages/gtest.sh";
-    let curl = Command::new("curl")
-        .args(["--proto", "'=https'", "--tlsv1.2", "-sSf", gtest_package_url])
+    let curl = Command::new("bash")
+        .arg(format!("<(curl --proto '=https' --tlsv1.2 -sSf {gtest_package_url}"))
         .current_dir(format!("{home}"))
-        .stdout(Stdio::piped())
+        .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
-        .spawn()
-        .unwrap();
+        .output()?;
 
+        /*
     let source = Command::new("source")
         .args(["-s", "--", "-y"])
         .stdin(Stdio::from(curl.stdout.unwrap()))
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .spawn()
-        .unwrap();
+        .unwrap();*/
     
     let output = source.wait_with_output().unwrap();
     let result = std::str::from_utf8(&output.stdout).unwrap();

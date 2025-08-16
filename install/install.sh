@@ -45,7 +45,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     which -s cargo
     if [[ $? != 0 ]] ; then
       echo "downloading cargo"
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | source -s -- -y
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
     fi
 
     source ~/.bashrc
