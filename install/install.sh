@@ -6,31 +6,37 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     which -s git
     if [[ $? != 0 ]] ; then
+      echo "downloading git"
       apt install -y git
     fi
 
     which -s g++
     if [[ $? != 0 ]] ; then
+      echo "downloading g++"
       apt install -y g++
     fi
 
     which -s curl
     if [[ $? != 0 ]] ; then
+      echo "downloading curl"
       apt install -y curl
     fi
 
     which -s cmake
     if [[ $? != 0 ]] ; then
+      echo "downloading cmake"
       apt install -y cmake
     fi
 
     which -s cppcheck
     if [[ $? != 0 ]] ; then
+      echo "downloading cppcheck"
       apt install -y cppcheck
     fi
 
     which -s pipx
     if [[ $? != 0 ]] ; then
+      echo "downloading pipx"
       apt install -y pipx
       pipx ensurepath
     fi
@@ -38,6 +44,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     which -s cargo
     if [[ $? != 0 ]] ; then
+      echo "downloading cargo"
       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | source -s -- -y
     fi
 
@@ -95,6 +102,7 @@ else
 fi
 
 # Create gojo directory.
+echo "making gojo directory"
 mkdir -p ~/.gojo
 mkdir -p ~/.gojo/repos
 mkdir ~/.gojo/include
@@ -102,6 +110,7 @@ mkdir ~/.gojo/lib
 mkdir ~/.gojo/bin
 
 # Clone gojo repo and build from source.
+echo "cloning gojo"
 cd ~/.gojo/repos
 git clone https://github.com/gojo-cli/gojo.git
 cd gojo
@@ -111,6 +120,7 @@ mv target/release/gojo ~/.gojo/bin
 rm -rf target
 
 # Clone gojo++ repo and build from source.
+echo "cloning gojo++"
 cd ~/.gojo/repos
 git clone https://github.com/gojo-cli/gojo-updater.git
 cd gojo-updater
@@ -120,6 +130,7 @@ mv target/release/gojo-updater target/release/gojo++
 mv target/release/gojo++ ~/.gojo/bin
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    echo "adding gojo to bashrc"
     echo "export PATH=\"$HOME/.gojo/bin:\$PATH\"" >> ~/.bashrc
     source ~/.bashrc
     echo ""
