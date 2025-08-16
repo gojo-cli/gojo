@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - name: Download gojo install script
-        run: curl --proto '=https' --tlsv1.2 -sSf https://gojo-cli.github.io/gojo/install.sh > ~/
+        run: curl --proto '=https' --tlsv1.2 -sSf https://gojo-cli.github.io/gojo/install.sh > ~/install.sh
       - name: Run install script
         run: source ~/install.sh
       - name: Check gojo installation
