@@ -31,9 +31,9 @@ pub fn install_gtest() -> Result<()> {
         .spawn()
         .unwrap();*/
     
-    let output = source.wait_with_output().unwrap();
-    let result = std::str::from_utf8(&output.stdout).unwrap();
-    println!("{result}");
+    //let output = source.wait_with_output().unwrap();
+    //let result = std::str::from_utf8(&output.stdout).unwrap();
+    //println!("{result}");
     println!("gtest successfully installed");
     Ok(())
 }
