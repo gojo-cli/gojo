@@ -14,9 +14,10 @@ pub fn install_gtest() -> Result<()> {
       return Ok(());
     }
 
-    let gtest_package_url = "https://gojo-cli.github.io/packages/gtest.sh";
-    let curl = Command::new("bash")
-        .arg(format!("<(curl --proto '=https' --tlsv1.2 -sSf {gtest_package_url}"))
+    // let gtest_package_url = "https://gojo-cli.github.io/packages/gtest.sh";
+    let gtest_install_script = format!("{home}/.gojo/repos/packages/packages/gtest.sh");
+    Command::new("bash")
+        .arg(gtest_install_script)
         .current_dir(format!("{home}"))
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())

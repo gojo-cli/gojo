@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# source <(curl --proto '=https' --tlsv1.2 -sSf https://gojo-cli.github.io/gojo/install.sh)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "linux detected"
     # Install dependencies
@@ -123,11 +124,15 @@ rm -rf target
 echo "cloning gojo++"
 cd ~/.gojo/repos
 git clone https://github.com/gojo-cli/gojo-updater.git
-cd gojo-updater
-~/.cargo/bin/cargo build --release
-strip target/release/gojo-updater
-mv target/release/gojo-updater target/release/gojo++
-mv target/release/gojo++ ~/.gojo/bin
+#cd gojo-updater
+#~/.cargo/bin/cargo build --release
+#strip target/release/gojo-updater
+#mv target/release/gojo-updater target/release/gojo++
+#mv target/release/gojo++ ~/.gojo/bin
+
+# Clone packages repository
+cd ~/.gojo/repos
+git clone https://github.com/gojo-cli/packages.git
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "adding gojo to bashrc"
