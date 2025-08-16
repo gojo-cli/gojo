@@ -114,7 +114,7 @@ rm -rf target
 cd ~/.gojo/repos
 git clone https://github.com/gojo-cli/gojo-updater.git
 cd gojo-updater
-~/.cargo/bin/cargocargo build --release
+~/.cargo/bin/cargo build --release
 strip target/release/gojo-updater
 mv target/release/gojo-updater target/release/gojo++
 mv target/release/gojo++ ~/.gojo/bin

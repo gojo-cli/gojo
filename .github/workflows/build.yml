@@ -27,7 +27,7 @@ jobs:
       - name: Install gojo
         run: curl --proto '=https' --tlsv1.2 -sSf https://gojo-cli.github.io/gojo/install.sh | bash -s -- -y && source ~/.bashrc
       - name: Check gojo installation
-        run: gojo --help
+        run: source ~/.bashrc && gojo --help
       - name: Init gojo project
         run: gojo init test --no-tests
       - name: Install gtest
